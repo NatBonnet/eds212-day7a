@@ -19,3 +19,45 @@ penguins_adelie <- palmerpenguins::penguins |> filter(species == "Adelie") |>
   group_by(sex)|>
   summarize(mean_flipper = mean(flipper_length_mm), sd_flipper = sd(flipper_length_mm), sample_size = n())
 
+animals <- data.frame(
+  stringsAsFactors = FALSE,
+          location = c("lagoon", "bluff", "creek", "oaks", "bluff"),
+           species = c("bobcat", "coyote", "fox", "squirrel", "bobcat"),
+          maturity = c("adult", "juvenile", "adult", "juvenile", "adult")
+)
+
+
+sites <- data.frame(
+  stringsAsFactors = FALSE,
+          location = c("beach", "lagoon", "bluff", "oaks"),
+    full_site_name = c("Goleta Beach","UCSB Lagoon",
+                       "Ellwood Mesa","Fremont Campground"),
+      jurisdiction = c("SB City", "UCSB", "SB City", "USFS")
+)
+
+# practicing join
+
+#practice with a full join- keeps all rows and adds all columns
+full_join(animals, sites)
+
+#left join- keeps only the rows tha are shared in by y with x
+left_join(animals, sites)
+
+#right join-the opposite 
+right_join(animals, sites)
+
+#inner join- no NAs
+inner_join(animals, sites)
+
+
+#filtering joins
+
+#semi join
+semi_join(animals, sites)
+#same as
+animals |> filter(location %in% sites$location)
+
+#anti-join
+anti_join(animals, sites)
+#same as
+animals |> filter(!location %in% sites$location)
