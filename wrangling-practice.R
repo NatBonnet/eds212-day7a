@@ -61,3 +61,37 @@ animals |> filter(location %in% sites$location)
 anti_join(animals, sites)
 #same as
 animals |> filter(!location %in% sites$location)
+
+
+#practice with lubridate
+my_date <- "03-13-1998"
+lubridate::mdy(my_date) #fixed yay
+
+#format that date is in determines function used to fix
+my_date <- "08-Jun-1974"
+lubridate::dmy(my_date)
+
+#another ex
+my_date <- "19160518"
+lubridate::ymd(my_date)
+
+# what happens if we pass a date that makes no sense
+lubridate::mdy("1942-08-30") #throws an error if its obviously wrong
+
+lubridate::dmy("09/12/84") #have to be careful of the month and day format because you might actually not know
+
+#working with date times
+time <- "2020-8-12 11:18"
+time <- lubridate::ymd_hm(time, tz = "America/Los_Angeles") #naming time zone
+
+#convert to PST
+with_tz(time, "America/Los_Angeles")
+
+# can extract information from dates
+week(time)
+year(time)
+day(time)
+
+start_time <- Sys.time()
+end_time <- Sys.time()
+end_time - start_time #can see how long it took for R to run
